@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Assignment8.Controllers.AlbumBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Album list</h2>
+
+<p>
+    @Html.ActionLink("Create new album", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Album name
+        </th>
+        <th>
+            Release date
+        </th>
+        <th>
+            Album image (cover art)
+        </th>
+        <th>
+            Album's primary genre
+        </th>
+        <th>
+            Coordinator who looks after the album
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.UrlAlbum)" width="200" height="100" />
+        </td>
+        <td>
+           @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coordinator)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

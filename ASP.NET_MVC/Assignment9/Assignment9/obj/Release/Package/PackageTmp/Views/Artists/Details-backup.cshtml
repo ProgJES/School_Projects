@@ -1,0 +1,88 @@
+﻿@model Assignment9.Controllers.ArtistBase
+
+@{
+    ViewBag.Title = "Details";
+    var ArtistName = Model.Name;
+    var userAccount = new Assignment9.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Details - @ArtistName</h2>
+@if (userAccount.HasRoleClaim("Coordinator"))
+{
+    <p>
+        @Html.ActionLink("Create New Album", "AddAlbum") |
+        @Html.ActionLink("Create New Media Item", "AddMediaItem")
+    </p>
+}
+
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthName)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthOrStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthOrStartDate)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlArtist)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.UrlArtist)" alt="artist photo" width="150" height="100" />
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Portrayal)
+        </dt>
+        <dd>
+            <div class="panel panel-default panel-body">            
+                @Html.Raw(Model.Portrayal)
+           </div>
+        </dd>
+    </dl>
+</div>
+@if (userAccount.HasRoleClaim("Executive"))
+{
+    <p>
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+   </p>
+}

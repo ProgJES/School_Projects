@@ -1,0 +1,73 @@
+﻿@model Assignment8.Controllers.AlbumWithDetail
+
+@{
+    ViewBag.Title = "Details";
+    var albumName = Model.Name;
+    var numOfTracks = Model.Tracks.Count();
+    var numOfArtists = Model.Artists.Count();
+}
+
+<h2>Details - @albumName</h2>
+<p>
+    @Html.ActionLink("Add New Track", "AddTrack")
+</p>
+<div>
+    <h4>Album details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Album name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Release date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt>
+            Album's primary genre
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt>
+            Album image (cover art)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.UrlAlbum)" width="200" height="150" />
+        </dd>
+
+        <dt>
+            Coordinator who looks after the album
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coordinator)
+        </dd>
+
+        <dt>
+            Number of tracks on this album
+        </dt>
+
+        <dd>
+            @numOfTracks
+        </dd>
+        <dt>
+            Number of artists on this album
+        </dt>
+        <dd>
+            @numOfArtists
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,74 @@
+﻿@model Assignment8.Controllers.ArtistWithDetail
+
+@{
+    ViewBag.Title = "Details";
+    var artistName = Model.Name;
+    var count = Model.AlbumsCount;
+    var count1 = Model.Albums.Count();
+}
+
+<h2>Details - @artistName</h2>
+<p>
+    @Html.ActionLink("Add New Album", "AddAlbum")
+</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Artist name or stage name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            If applicable, artist's birth name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthName)
+        </dd>
+
+        <dt>
+            Birth date, or start date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthOrStartDate)
+        </dd>
+
+        <dt>
+            Artist photo
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.UrlArtist)" width="200" height="150" />
+        </dd>
+
+        <dt>
+            Artist's primary genre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            Executive who looks after this artist
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executive)
+        </dd>
+        <dt>
+            Number of albums
+        </dt>
+        <dd>
+            @count1
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

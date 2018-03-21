@@ -1,0 +1,69 @@
+﻿@model Assignment6.Controllers.PlaylistEditTracksForm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@{ 
+    var count = Model.TracksCount;
+    var tName = Model.Name;
+    var pId = Model.PlaylistId;
+}
+<h2>Edit playlist <span class="bg-info">@tName</span></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Select tracks, and click the "Save changes" button</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PlaylistId)
+
+        <div class="form-group">
+            <div class="left">
+                <input type="submit" value="Save changes" class="btn btn-default" />
+                @Html.ActionLink("Back to Details", "Details", new { id = @pId })|
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+        <hr />
+        <br /> <br />
+        <div class="row">
+            @*Left pane*@
+            <div class="col-md-8">
+                <dl>
+                    <dt style="font-size:20px">All tracks</dt>
+                    @foreach (var item in Model.playlistlist)
+                    {
+                       <dd style="display:inline"><input type="checkbox" name="TrackIds" value="@item.Value" checked="@item.Selected" /></dd>
+                       <dd style="display:inline">@item.Text</dd>  
+                       <br />
+                    }
+                </dl>
+            </div>
+            @*Rigth pane*@
+            <div class="col-md-4" style="background-color:lightgray">
+                <dl>
+                    <dt style="font-size:20px">Now on playlist <span class="badge">@count</span></dt>
+                    @if (Model.NowOnPlayList.Count() > 0)
+                    {
+                        foreach (var item in Model.NowOnPlayList.OrderBy(t => t.Name))
+                        {
+                           <dd style="display:inline">@item.Name</dd>
+                           <br />
+                        }
+                    }
+                </dl>
+            </div>
+                
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
